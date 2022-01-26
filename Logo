@@ -1,0 +1,60 @@
+import processing.svg.*;
+
+PGraphics magic;
+
+PFont [] fonts = new PFont[9];
+int format = 800;
+float  textSize = format/6;
+float margin = textSize;
+//float marginHalf = margin/2;
+
+String m = „magical_“;
+String o = „operators“;
+
+boolean record;
+
+
+void setup() {
+  size(800,800);
+  colorMode(HSB);
+ frameRate(1);
+  println(textSize);
+  magic = createGraphics(width, height);
+  noLoop();
+}
+
+void draw() {
+  if (record) {
+    beginRecord(SVG, „LOGO/logoShape/frame-####.svg“);
+  }
+  int randColor = int(random(colors.length));
+  int randPastell = int(random(pastells.length));
+  int textColor = black; // colors[randColor], pastells[randPastell]
+  int backColor = 255;
+   if (frameCount % 5==0){
+   background(colors[randColor]);
+   fill(pastells[randPastell]);
+   stroke(pastells[randPastell]);
+  } else{
+  background(pastells[randPastell]);
+   fill(colors[randColor]);
+   stroke(colors[randColor]);
+  }  
+  //fill(pastells[randPastell]);
+  //stroke(textColor);*/
+  fonts();
+  logo();
+
+  //rect(0, height/2, width, 2);
+  //saveFrame(„IPad2/frame####.tiff“);
+  if (record) {
+    endRecord();
+    record = false;
+  }
+}
+
+// Use a keypress so thousands of files aren‘t created
+void mousePressed() {
+ redraw();
+  //record = true;
+}
